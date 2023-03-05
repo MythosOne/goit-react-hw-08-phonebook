@@ -1,9 +1,8 @@
 import { Formik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContacts } from '../redux/contactsSlice';
-import { getContacts } from '../redux/selectors';
-import { nanoid } from 'nanoid';
-import { AddContactForm, Label, AddButton, FormikInput } from './App.styled';
+import { addContact } from '../../redux/contacts/operations';
+import { getContacts } from '../../redux/contacts/selectors';
+import { AddContactForm, Label, AddButton, FormikInput } from './ContactsForm.styled';
 
 export const ContactForm = () => {
   const dispatch = useDispatch();
@@ -21,14 +20,12 @@ export const ContactForm = () => {
       alert('Fields must be filled!');
     } else {
       dispatch(
-        addContacts({
-          id: nanoid(),
+        addContact({
           name,
-          number,
+          phone: number,
         })
       );
     }
-
     resetForm();
   };
 
