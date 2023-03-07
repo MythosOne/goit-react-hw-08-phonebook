@@ -22,7 +22,7 @@ export const ContactForm = () => {
       dispatch(
         addContact({
           name,
-          phone: number,
+          number,
         })
       );
     }

@@ -1,17 +1,27 @@
 import { Formik } from 'formik';
+import { useDispatch } from 'react-redux';
+import { register } from 'redux/auth/operations';
 import { AddRegisterForm, Label, FormikInput, RegButton } from './RegisterForm.styled';
 
 export const RegisterForm = () => {
+    const dispatch = useDispatch();
 
-    const handleSubmit = () => {
-    
+    const handleSubmit = values => {
+        dispatch(
+            register({
+                name: values.userName,
+                email: values.email,
+                password: values.password
+            })
+        );
     };
 
     return (
         <Formik
             initialValues={{
-                name: '',
-                number: '',
+                userName: '',
+                email: '',
+                password: '',
             }}
             onSubmit={handleSubmit}
         >
@@ -19,8 +29,8 @@ export const RegisterForm = () => {
                 <Label>
                     UserName
                     <FormikInput
-                        type="name"
-                        name="name"
+                        type="text"
+                        name="userName"
                         placeholder="Enter your name"
                         required
                     />
@@ -37,7 +47,7 @@ export const RegisterForm = () => {
                 <Label>
                     Password
                     <FormikInput
-                        type="text"
+                        type="password"
                         name="password"
                         placeholder="Enter your password"
                         required
